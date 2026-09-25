@@ -1,6 +1,5 @@
 (function () {
   console.log('MFSD Wealth & Happiness Chat loaded');
-  console.log('MFSD_WH_CFG', window.MFSD_WH_CFG);
   
   const cfg = window.MFSD_WH_CFG || {};
   const root = document.getElementById("mfsd-wh-root");
@@ -165,8 +164,8 @@
         contextDiv.appendChild(badge);
       }
       
-      if (userContext.mbti_type) {
-        const badge = el('span', 'wh-context-badge', '🧠 MBTI: ' + userContext.mbti_type);
+      if (userContext.personality && userContext.personality.name) {
+        const badge = el('span', 'wh-context-badge', '🧠 ' + userContext.personality.name);
         contextDiv.appendChild(badge);
       }
       
