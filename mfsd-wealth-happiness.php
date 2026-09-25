@@ -2,14 +2,14 @@
 /**
  * Plugin Name: MFSD Success, Wealth & Happiness Debate
  * Description: AI chatbot debate on success, wealth and happiness with WhatsApp-style interface for 12-14 year olds
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: MisterT9007
  */
 
 if (!defined('ABSPATH')) exit;
 
 final class MFSD_Wealth_Happiness {
-    const VERSION = '1.0.0';
+    const VERSION = '1.1.0';
     const TBL_CONVERSATIONS = 'mfsd_wealth_and_happiness';
 
     public static function instance() {
@@ -52,10 +52,10 @@ final class MFSD_Wealth_Happiness {
 
     public function shortcode($atts) {
         wp_localize_script('mfsd-wealth-happiness', 'MFSD_WH_CFG', array(
-            'restUrlChat'        => esc_url_raw(rest_url('mfsd/v1/wealth-chat')),
-            'restUrlLoad'        => esc_url_raw(rest_url('mfsd/v1/wealth-load')),
-            'restUrlSave'        => esc_url_raw(rest_url('mfsd/v1/wealth-save')),
-            'restUrlContext'     => esc_url_raw(rest_url('mfsd/v1/wealth-context')),
+            'restUrlChat'        => esc_url_raw(rest_url('mfsd-wealth/v1/wealth-chat')),
+            'restUrlLoad'        => esc_url_raw(rest_url('mfsd-wealth/v1/wealth-load')),
+            'restUrlSave'        => esc_url_raw(rest_url('mfsd-wealth/v1/wealth-save')),
+            'restUrlContext'     => esc_url_raw(rest_url('mfsd-wealth/v1/wealth-context')),
             'nonce'              => wp_create_nonce('wp_rest'),
         ));
 
@@ -70,25 +70,25 @@ final class MFSD_Wealth_Happiness {
     }
 
     public function register_routes() {
-        register_rest_route('mfsd/v1', '/wealth-chat', array(
+        register_rest_route('mfsd-wealth/v1', '/wealth-chat', array(
             'methods'             => WP_REST_Server::CREATABLE,
             'callback'            => array($this, 'api_chat'),
             'permission_callback' => array($this, 'check_permission'),
         ));
 
-        register_rest_route('mfsd/v1', '/wealth-load', array(
+        register_rest_route('mfsd-wealth/v1', '/wealth-load', array(
             'methods'             => WP_REST_Server::READABLE,
             'callback'            => array($this, 'api_load'),
             'permission_callback' => array($this, 'check_permission'),
         ));
 
-        register_rest_route('mfsd/v1', '/wealth-save', array(
+        register_rest_route('mfsd-wealth/v1', '/wealth-save', array(
             'methods'             => WP_REST_Server::CREATABLE,
             'callback'            => array($this, 'api_save'),
             'permission_callback' => array($this, 'check_permission'),
         ));
 
-        register_rest_route('mfsd/v1', '/wealth-context', array(
+        register_rest_route('mfsd-wealth/v1', '/wealth-context', array(
             'methods'             => WP_REST_Server::READABLE,
             'callback'            => array($this, 'api_context'),
             'permission_callback' => array($this, 'check_permission'),
